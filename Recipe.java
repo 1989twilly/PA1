@@ -127,15 +127,28 @@ public class Recipe {
      * 
      * @param name The desired name of the recipe
      */
-    public void setName( String n ) {
+    public void setName( String newRecipe ) {
         
-        n.trim();
-        
-        if ( name == null || n.length( ) < 3) {
-            name = "unknown";
+        String oldRecipe = getName( );
+        if ( newRecipe == null ) {
+            if (oldRecipe != null ) {
+                newRecipe = oldRecipe;
+            } else {
+                newRecipe = "unknown";
+            }
         } else {
-            name = n;
+            newRecipe = newRecipe.trim();
+            newRecipe = newRecipe.replaceAll("\\s+", " ");
+            if ( newRecipe.length( ) < 3 ) {
+                if ( oldRecipe != null ) {
+                    newRecipe = oldRecipe;
+                } else {
+                    newRecipe = "unknown";
+                }
+            }
         }
+        
+        name = newRecipe;
     }
     
     /**

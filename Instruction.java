@@ -45,15 +45,30 @@ public class Instruction {
      * 
      * @param ins The new instruction.
      */
-    public void setInstruction( String ins ) {
+    public void setInstruction( String newInstruction ) {
         
-        ins.trim( );
+        String oldInstruction = getInstruction( );
         
-        if ( ins != null && ins.length() > 2 ) {
-            instruction = ins;
+        if ( newInstruction == null ) {
+            if (oldInstruction != null ) {
+                newInstruction = oldInstruction;
+            } else {
+                newInstruction = "unknown";
+            }
         } else {
-            instruction = "unknown";
+            newInstruction = newInstruction.trim();
+            newInstruction = newInstruction.replaceAll("\\s+", " ");
+            if ( newInstruction.length( ) < 3 ) {
+                if ( oldInstruction != null ) {
+                    newInstruction = oldInstruction;
+                } else {
+                    newInstruction = "unknown";
+                }
+            }
         }
+        
+        instruction = newInstruction;
+       
         
     }
     
@@ -64,7 +79,7 @@ public class Instruction {
      */
     public String toString( ) {
         
-        return instruction;
+        return getInstruction( );
         
     }
     

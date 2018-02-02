@@ -76,22 +76,36 @@ public class Ingredient {
      * 
      * @param n The name of the ingredient.
      */
-    public void setName( String n ) {
+    public void setName( String newName ) {
         
         //if name is null, all spaces, or if the incoming parameter has a 
-        //length less than three (excluding leading and trailing spaces,
+        //length less than three (excluding leading and trailing spaces),
         //maintain the prior value. If no prior value, then name should be
         //set to "unknown".
-        
-        n.trim( );
-        
-        if ( n != null && n.length( ) > 2 ) {
-            name = n;
+        String oldName = getName( );
+        if ( newName == null ) {
+            if (oldName != null ) {
+                newName = oldName;
+            } else {
+                newName = "unknown";
+            }
         } else {
-            name = "unknown";
+            newName = newName.trim();
+            newName = newName.replaceAll("\\s+", " ");
+            if ( newName.length( ) < 3 ) {
+                if ( oldName != null ) {
+                    newName = oldName;
+                } else {
+                    newName = "unknown";
+                }
+            }
         }
+        
+        name = newName;
+            
     }
-    
+            
+      
     /**
      * Sets the value of the quantity attribute.
      * 
@@ -110,19 +124,32 @@ public class Ingredient {
      * 
      * @param um The unit of measurement.
      */
-    public void setUOM( String um ) {
+    public void setUOM( String newUOM ) {
         
         //if name is null, all spaces, or if the incoming parameter has a 
         //length less than three (excluding leading and trailing spaces,
         //maintain the prior value. If no prior value, then name should be
         //set to "unknown". ISNT IT ALREADY SET TO UNKNOWN?
-        um.trim( );
-        
-        if ( um != null && um.length( ) > 2 ) {
-            uom = um;
+        String oldUOM = getUOM( );
+        if ( newUOM == null ) {
+            if (oldUOM != null ) {
+                newUOM = oldUOM;
+            } else {
+                newUOM = "unknown";
+            }
         } else {
-            uom = "unknown";
+            newUOM = newUOM.trim();
+            newUOM = newUOM.replaceAll("\\s+", " ");
+            if ( newUOM.length( ) < 3 ) {
+                if ( oldUOM != null ) {
+                    newUOM = oldUOM;
+                } else {
+                    newUOM = "unknown";
+                }
+            }
         }
+        
+        uom = newUOM;
         
     }
     
